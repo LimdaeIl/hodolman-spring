@@ -9,6 +9,6 @@ public class PostController {
     // SSR 방식: jsp, thymeleaf, mustache, freemarker -> HTML rendering
     // SPA 방식: react(SSR + react = next), vue(SSR + vue = nuxt) -> js. <-> API(JSON)
 
-    @GetMapping("/")
+    @GetMapping("/posts")
     public String get() { return "Hello World!"; }
 }

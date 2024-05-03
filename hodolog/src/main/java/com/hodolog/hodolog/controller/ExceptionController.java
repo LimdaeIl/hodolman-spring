@@ -12,12 +12,16 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @Log4j2
 @RestControllerAdvice
 public class ExceptionController {
-    // 지난 시간에는 JSON 형식으로 받은 데이터를 @NotBlank 으로 검사를 하고 ExceptionHandler 를 통해서 적절한 에러 메시지를 작성했다.
 
+    // 잘못된 요청이 올 때 수행.
+    // MethodArgumentNotValidException 은 BindException 이 발생했을 때 좀 더 자세한 내용을 설명하기 위해 스프링 3.1부터 개편
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ErrorResponse invalidRequestHandler(MethodArgumentNotValidException e) {
-        ErrorResponse response = new ErrorResponse("400", "잘못된 요청입니다.");
+        ErrorResponse response = ErrorResponse.builder()
+                .code("400")
+                .message("잘못된 요청입니다.")
+                .build();
 
         for(FieldError fieldError: e.getFieldErrors()) {
             response.addValidation(fieldError.getField(), fieldError.getDefaultMessage());

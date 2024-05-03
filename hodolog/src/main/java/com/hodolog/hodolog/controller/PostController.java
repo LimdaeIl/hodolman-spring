@@ -1,14 +1,21 @@
 package com.hodolog.hodolog.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.hodolog.hodolog.request.PostCreate;
+import lombok.extern.log4j.Log4j2;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 @RestController
+@Log4j2
 public class PostController {
 
-    // SSR 방식: jsp, thymeleaf, mustache, freemarker -> HTML rendering
-    // SPA 방식: react(SSR + react = next), vue(SSR + vue = nuxt) -> js. <-> API(JSON)
+    // HTTP Method: GET, POST, PUT, PATCH, DELETE, OPTIONS, HEAD, TRACE, CONNECT
+    // 글 등록: POST Method
 
-    @GetMapping("/posts")
-    public String get() { return "Hello World!"; }
+    @PostMapping("/posts")
+    public String post(@RequestBody PostCreate postCreate) {
+        log.info("postCreate.toString(): {}", postCreate.toString());
+        return "Hello World!";
+    }
 }

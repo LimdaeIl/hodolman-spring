@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @Log4j2
 @RestControllerAdvice
 public class ExceptionController {
+    // 지난 시간에는 JSON 형식으로 받은 데이터를 @NotBlank 으로 검사를 하고 ExceptionHandler 를 통해서 적절한 에러 메시지를 작성했다.
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
